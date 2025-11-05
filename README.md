@@ -75,7 +75,7 @@ npx -y @ai-ql/api-proxy --target="https://api.deepinfra.com/v1/openai" --port="9
 
 Click below to use the GitHub Codespace:
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/aiql-community/api-proxy?quickstart=1)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/AI-QL/api-proxy?quickstart=1)
 
 Or fork this repo and create a codespace manually:
 1. Wait for env ready in your browser
@@ -97,7 +97,7 @@ Fork this repo and set `DOCKERHUB_USERNAME` and `DOCKERHUB_TOKEN` in your secret
 
 Normally, the step should be:
 
-1. [Fork](https://github.com/aiql-community/api-proxy/fork) this repo
+1. [Fork](https://github.com/AI-QL/api-proxy/fork) this repo
 2. Settings →  Secrets and variables → Actions → New repository secret
 
 ## Docker Compose
