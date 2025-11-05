@@ -1,6 +1,6 @@
 {
   "name": "@ai-ql/api-proxy",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "OpenAI API Proxy by Docker",
   "main": "index.js",
   "keywords": [],
@@ -12,7 +12,7 @@
     "index.js"
   ],
   "bin": {
-    "openai-proxy": "index.js"
+    "api-proxy": "index.js"
   },
   "scripts": {
     "start": "node index.js",
@@ -23,7 +23,8 @@
   "dependencies": {
     "ci": "^2.3.0",
     "express": "^5.1.0",
-    "http-proxy-middleware": "^3.0.5"
+    "http-proxy-middleware": "^3.0.5",
+    "yargs": "^18.0.0"
   },
   "devDependencies": {
     "shx": "^0.4.0"

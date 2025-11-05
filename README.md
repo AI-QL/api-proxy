@@ -1,16 +1,27 @@
-# OpenAI Proxy Docker
+# API Proxy
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/aiql/openai-proxy-docker.svg)](https://hub.docker.com/r/aiql/openai-proxy-docker)
-[![LICENSE](https://img.shields.io/github/license/AI-QL/openai-proxy-docker)](https://github.com/AI-QL/openai-proxy-docker/blob/main/LICENSE)
+[![Docker Pulls](https://img.shields.io/docker/pulls/aiql/api-proxy.svg)](https://hub.docker.com/r/aiql/api-proxy)
+[![LICENSE](https://img.shields.io/github/license/AI-QL/api-proxy)](https://github.com/AI-QL/api-proxy/blob/main/LICENSE)
 
-This repository provides a Dockerized proxy for accessing the OpenAI API, allowing for simplified and streamlined interaction with the model.
+> The old version (version <= 2.0.0) could be found at: [![Docker Pulls](https://img.shields.io/docker/pulls/aiql/openai-proxy-docker.svg)](https://hub.docker.com/r/aiql/openai-proxy-docker) 
 
-With the [Docker image](https://hub.docker.com/r/aiql/openai-proxy-docker), you can easily deploy a proxy instance to serve as a gateway between your application and the OpenAI API, reducing the complexity of API interactions and enabling more efficient development.
+This repository offers both Dockerized and local proxy solutions for accessing any API, with specialized support for popular interfaces like the OpenAI API. It enables simplified and streamlined interactions with various LLMs.
 
-## Use case
+With the [Docker image](https://hub.docker.com/r/aiql/api-proxy), you can easily deploy a proxy instance to serve as a gateway between your application and the OpenAI API, reducing the complexity of API interactions and enabling more efficient development.
 
-1. For users who are restricted from direct access to the OpenAI API, particularly those in countries where OpenAI will be blocking API access starting July 2024
-2. For users who need to access private APIs that lack Cross-Origin Resource Sharing (CORS) headers, this solution provides a proxy to bypass CORS restrictions and enable seamless API interactions. 
+## Use cases
+
+### 1. Geo-restricted API Access | 地域限制API访问
+For users who are restricted from direct access to the OpenAI API, particularly those in countries where OpenAI will be blocking API access starting July 2024.
+
+### 2. CORS Bypass | 跨域限制突破
+For users who need to access private APIs that lack Cross-Origin Resource Sharing (CORS) headers, this solution provides a proxy to bypass CORS restrictions and enable seamless API interactions.
+
+### 3. TLS Certificate Validation Bypass | TLS证书验证绕过
+Bypass client-side security checks, such as enterprise internal self-signed TLS certificates that cannot directly pass TLS certificate validation in many commonly used libraries.
+
+### 4. Custom Host Header Routing | 自定义Host请求头
+Specify different Host headers than the URL itself. For some custom hosts, frontend projects cannot directly modify the Host header, requiring a proxy to separately define the URL and Host header parameters.
 
 ## Demo
 
@@ -27,7 +38,7 @@ With the [Docker image](https://hub.docker.com/r/aiql/openai-proxy-docker), you 
 Execute this command to start the proxy with default settings:
 
 ```shell
-sudo docker run -d -p 9017:9017 aiql/openai-proxy-docker:latest
+sudo docker run -d -p 9017:9017 aiql/api-proxy:latest
 ```
 
 Then, you can access it by ```YOURIP:9017```
@@ -38,11 +49,12 @@ Then, you can access it by ```YOURIP:9017```
 
 You can change default port and default target by setting `-e` in docker, which means that you can use it for any backend followed by OpenAPI format:
 
-| Parameter | Default Value |
-| --------- | ------------- |
-| PORT      | 9017          |
-| TARGET    | https://api.openai.com |
-
+| Parameter | Env Var | Default Value | Description |
+| --------- | ------- | ------------- | ----------- |
+| port      | PORT    | 9017          | Server port number (valid range: 1-65535) |
+| target    | TARGET  | https://api.openai.com | Target URL or API endpoint to connect to |
+| host      | HOST    | N/A (Inherited from the target URL) | Host header specifying the domain name |
+| secure    | SECURE  | true | Enables security features, such as TLS certificate validation |
 
 ## Run locally via NPX
 
@@ -63,7 +75,7 @@ npx -y @ai-ql/api-proxy --target="https://api.deepinfra.com/v1/openai" --port="9
 
 Click below to use the GitHub Codespace:
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/aiql-community/openai-proxy-docker?quickstart=1)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/aiql-community/api-proxy?quickstart=1)
 
 Or fork this repo and create a codespace manually:
 1. Wait for env ready in your browser
@@ -85,7 +97,7 @@ Fork this repo and set `DOCKERHUB_USERNAME` and `DOCKERHUB_TOKEN` in your secret
 
 Normally, the step should be:
 
-1. [Fork](https://github.com/aiql-community/openai-proxy-docker/fork) this repo
+1. [Fork](https://github.com/aiql-community/api-proxy/fork) this repo
 2. Settings →  Secrets and variables → Actions → New repository secret
 
 ## Docker Compose
@@ -98,7 +110,7 @@ You can apply this approach to other APIs, such as Nvidia NIM:
 ```DOCKERFILE
 services:
   nvidia-proxy:
-    image: aiql/openai-proxy-docker:latest
+    image: aiql/api-proxy:latest
     container_name: nvidia-proxy
     environment:
       PORT: "9101"
@@ -146,9 +158,9 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     network_mode: bridge
 
-  openai-proxy:
-    image: aiql/openai-proxy-docker:latest
-    container_name: openai-proxy
+  api-proxy:
+    image: aiql/api-proxy:latest
+    container_name: api-proxy
     environment:
       LETSENCRYPT_HOST: api.example.com
       VIRTUAL_HOST: api.example.com
