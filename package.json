@@ -1,6 +1,6 @@
 {
   "name": "@ai-ql/api-proxy",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "OpenAI API Proxy by Docker",
   "main": "index.js",
   "keywords": [],

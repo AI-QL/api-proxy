@@ -127,8 +127,6 @@ const runProxy = () => {
       validatedProxyParams.secure = false
     }
 
-    console.log(validatedProxyParams)
-
     const app = createProxyApp(validatedProxyParams, host);
 
     const server = app.listen(validatedPort, () => {
