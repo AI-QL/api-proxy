@@ -1,9 +1,11 @@
 # API Proxy
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/aiql/api-proxy.svg)](https://hub.docker.com/r/aiql/api-proxy)
+[![NPM Version](https://img.shields.io/npm/v/%40ai-ql%2Fapi-proxy)](https://www.npmjs.com/package/@ai-ql/api-proxy)
 [![LICENSE](https://img.shields.io/github/license/AI-QL/api-proxy)](https://github.com/AI-QL/api-proxy/blob/main/LICENSE)
 
-> The old version (version <= 2.0.0) could be found at: [![Docker Pulls](https://img.shields.io/docker/pulls/aiql/openai-proxy-docker.svg)](https://hub.docker.com/r/aiql/openai-proxy-docker) 
+> The previous Docker image (version 2.0.0 and below) is available at:
+[![Docker Pulls](https://img.shields.io/docker/pulls/aiql/openai-proxy-docker.svg)](https://hub.docker.com/r/aiql/openai-proxy-docker) 
 
 This repository offers both Dockerized and local proxy solutions for accessing any API, with specialized support for popular interfaces like the OpenAI API. It enables simplified and streamlined interactions with various LLMs.
 
